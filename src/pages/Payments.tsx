@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { usePayment } from '../context/PaymentContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,10 +8,11 @@ import { format } from 'date-fns';
 import { toast } from '../hooks/use-toast';
 
 const Payments: React.FC = () => {
-  const { payments, requestPayment, isLoading } = usePayment();
+  const navigate = useNavigate();
+  const { payments, isLoading } = usePayment();
 
-  const handleRequestPayment = async (paymentId: number) => {
-    await requestPayment(paymentId);
+  const handleRequestPayment = async (payment: any) => {
+    navigate('/payment-method', { state: { payment } });
   };
 
   const getStatusBadgeClass = (status: string) => {
@@ -75,7 +77,7 @@ const Payments: React.FC = () => {
                       {payment.status === 'unpaid' && (
                         <Button 
                           size="sm"
-                          onClick={() => handleRequestPayment(payment.id)}
+                          onClick={() => handleRequestPayment(payment)}
                           disabled={isLoading}
                           className="bg-primary hover:bg-primary/90"
                         >

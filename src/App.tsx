@@ -15,6 +15,8 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Payments from "./pages/Payments";
+import PaymentMethod from "./pages/PaymentMethod";
+import PaymentProcessing from "./pages/PaymentProcessing";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -64,6 +66,8 @@ const App = () => (
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/payments" element={<Payments />} />
+                <Route path="/payment-method" element={<PaymentMethod />} />
+                <Route path="/payment-processing" element={<PaymentProcessing />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
