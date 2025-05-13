@@ -25,7 +25,20 @@ const Payments: React.FC = () => {
         <h1 className="text-2xl font-bold mb-2">My Payments</h1>
         <p className="text-white/80">Request early payments</p>
       </div>
-      
+      <div className='p-2 mb-2'>
+
+      <div className="mt-8 bg-primary/10 rounded-lg p-4">
+          <h3 className="font-medium mb-2">How it works</h3>
+          <p className="text-sm text-gray-600 mb-4">
+            When you request an early payment, Jama will pay you within 24 hours. When the National Service Authority makes the payment, it will go directly to Jama.
+          </p>
+          <ul className="text-sm text-gray-600 list-disc pl-5 space-y-1">
+            <li>No interest charged</li>
+            <li>No hidden fees</li>
+            <li>Get paid in 24 hours or less</li>
+          </ul>
+        </div>
+      </div>
       {/* Payment List */}
       <div className="p-6">
         <div className="mb-6">
@@ -75,17 +88,7 @@ const Payments: React.FC = () => {
           )}
         </div>
         
-        <div className="mt-8 bg-primary/10 rounded-lg p-4">
-          <h3 className="font-medium mb-2">How it works</h3>
-          <p className="text-sm text-gray-600 mb-4">
-            When you request an early payment, Jama will pay you within 24 hours. When the National Service Authority makes the payment, it will go directly to Jama.
-          </p>
-          <ul className="text-sm text-gray-600 list-disc pl-5 space-y-1">
-            <li>No interest charged</li>
-            <li>No hidden fees</li>
-            <li>Get paid in 24 hours or less</li>
-          </ul>
-        </div>
+        
       </div>
     </div>
   );
