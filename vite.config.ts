@@ -39,7 +39,7 @@ export default defineConfig(({ mode }) => ({
     componentTagger(),
     
   ].filter(Boolean),
-  // base: '/jama-payday-now/',
+  base: '/jama-payday-now/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
