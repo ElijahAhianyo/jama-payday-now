@@ -64,6 +64,7 @@ const Dashboard: React.FC = () => {
 
   // Get recent transactions (limit to 5)
   const recentTransactions = [...payments]
+    .filter(p => p.status !== 'unpaid')
     .sort((a, b) => new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime())
     .slice(0, 5);
 
@@ -94,7 +95,7 @@ const Dashboard: React.FC = () => {
             <h3 className="text-3xl font-bold">GH₵ {totalEverRequested.toFixed(2)}</h3>
           </div>
           <Button 
-            className="bg-green-500 hover:bg-green-600"
+            className="bg-black hover:bg-black/80"
             asChild
           >
             <Link to="/payments">Make a request</Link>

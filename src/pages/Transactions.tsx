@@ -10,8 +10,11 @@ const Transactions: React.FC = () => {
   const navigate = useNavigate();
   const { payments } = usePayment();
   
+  // Filter out unpaid transactions - only show paid, pending, requested
+  const filteredTransactions = payments.filter(p => p.status !== 'unpaid');
+  
   // Sort transactions by date (newest first)
-  const sortedTransactions = [...payments].sort(
+  const sortedTransactions = [...filteredTransactions].sort(
     (a, b) => new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime()
   );
 
@@ -19,8 +22,6 @@ const Transactions: React.FC = () => {
     switch (status) {
       case 'paid':
         return 'bg-green-100 text-green-800';
-      case 'unpaid':
-        return 'bg-red-100 text-red-800';
       case 'pending':
         return 'bg-yellow-100 text-yellow-800';
       case 'requested':
@@ -45,7 +46,7 @@ const Transactions: React.FC = () => {
           </Button>
           <div>
             <h1 className="text-2xl font-bold">Transaction History</h1>
-            <p className="text-white/80">All your transactions</p>
+            <p className="text-white/80">Paid, pending, and processed transactions</p>
           </div>
         </div>
       </div>

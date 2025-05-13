@@ -16,6 +16,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Payments from "./pages/Payments";
 import PaymentMethod from "./pages/PaymentMethod";
+import PaymentMethodEdit from "./pages/PaymentMethodEdit";
 import PaymentProcessing from "./pages/PaymentProcessing";
 import Transactions from "./pages/Transactions";
 import TransactionDetail from "./pages/TransactionDetail";
@@ -69,6 +70,7 @@ const App = () => (
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/payments" element={<Payments />} />
                 <Route path="/payment-method" element={<PaymentMethod />} />
+                <Route path="/payment-method-edit" element={<PaymentMethodEdit />} />
                 <Route path="/payment-processing" element={<PaymentProcessing />} />
                 <Route path="/transactions" element={<Transactions />} />
                 <Route path="/transaction/:id" element={<TransactionDetail />} />

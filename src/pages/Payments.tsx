@@ -11,23 +11,11 @@ const Payments: React.FC = () => {
   const navigate = useNavigate();
   const { payments, isLoading } = usePayment();
 
+  // Filter to only show unpaid payments
+  const unpaidPayments = payments.filter(p => p.status === 'unpaid');
+
   const handleRequestPayment = async (payment: any) => {
     navigate('/payment-method', { state: { payment } });
-  };
-
-  const getStatusBadgeClass = (status: string) => {
-    switch (status) {
-      case 'paid':
-        return 'bg-green-100 text-green-800';
-      case 'unpaid':
-        return 'bg-red-100 text-red-800';
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'requested':
-        return 'bg-blue-100 text-blue-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
   };
 
   return (
@@ -35,25 +23,25 @@ const Payments: React.FC = () => {
       {/* Header */}
       <div className="bg-primary p-6 text-white">
         <h1 className="text-2xl font-bold mb-2">My Payments</h1>
-        <p className="text-white/80">View and request early payments</p>
+        <p className="text-white/80">Request early payments</p>
       </div>
       
       {/* Payment List */}
       <div className="p-6">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">Payment History</h2>
+          <h2 className="text-xl font-semibold mb-2">Unpaid Months</h2>
           <p className="text-gray-500 text-sm">
             Request early payments for months you haven't been paid yet
           </p>
         </div>
         
         <div className="space-y-4">
-          {payments.length === 0 ? (
+          {unpaidPayments.length === 0 ? (
             <div className="text-center p-8 text-gray-500">
-              No payment records found
+              No unpaid months found
             </div>
           ) : (
-            payments.map((payment) => (
+            unpaidPayments.map((payment) => (
               <Card key={payment.id} className="overflow-hidden">
                 <CardContent className="p-0">
                   <div className="flex items-center justify-between p-4">
@@ -62,10 +50,7 @@ const Payments: React.FC = () => {
                         {payment.month} {payment.year}
                       </p>
                       <div className="flex items-center mt-1">
-                        <span className={`px-2 py-1 rounded-full text-xs ${getStatusBadgeClass(payment.status)}`}>
-                          {payment.status === 'requested' ? 'Processing' : payment.status}
-                        </span>
-                        <span className="text-xs text-gray-500 ml-2">
+                        <span className="text-xs text-gray-500">
                           Due: {format(new Date(payment.dueDate), 'MMM d, yyyy')}
                         </span>
                       </div>
@@ -74,26 +59,14 @@ const Payments: React.FC = () => {
                       <span className="font-bold mr-4">
                         GH₵ {payment.amount.toFixed(2)}
                       </span>
-                      {payment.status === 'unpaid' && (
-                        <Button 
-                          size="sm"
-                          onClick={() => handleRequestPayment(payment)}
-                          disabled={isLoading}
-                          className="bg-primary hover:bg-primary/90"
-                        >
-                          Get Paid
-                        </Button>
-                      )}
-                      {payment.status === 'requested' && (
-                        <Button 
-                          size="sm"
-                          variant="outline"
-                          disabled
-                          className="text-primary border-primary/30"
-                        >
-                          Processing
-                        </Button>
-                      )}
+                      <Button 
+                        size="sm"
+                        onClick={() => handleRequestPayment(payment)}
+                        disabled={isLoading}
+                        className="bg-primary hover:bg-primary/90"
+                      >
+                        Get Paid
+                      </Button>
                     </div>
                   </div>
                 </CardContent>
