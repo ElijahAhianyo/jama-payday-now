@@ -20,9 +20,15 @@ const PaymentProcessing: React.FC = () => {
   const location = useLocation();
   const { payment, paymentMethod } = (location.state as LocationState) || {};
   
+  useEffect(() => {
+    // If no payment data is present, navigate back to payments
+    if (!payment || !paymentMethod) {
+      navigate('/payments');
+    }
+  }, [payment, paymentMethod, navigate]);
+
+  // Return early if no payment data
   if (!payment || !paymentMethod) {
-    // Navigate back to payments if no payment data
-    navigate('/payments');
     return null;
   }
   
