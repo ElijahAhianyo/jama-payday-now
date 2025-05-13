@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
+  base: '/jama-payday-now/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
